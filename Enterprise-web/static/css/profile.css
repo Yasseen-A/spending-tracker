@@ -1,0 +1,49 @@
+.profile{
+  margin: 0 auto;
+  margin-top: 60px;
+  width: 1000px;
+  color: white;
+}
+
+.spending-menu > ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  width: 200px;
+  position: absolute;
+}
+
+.spendings-table{
+  width: 70%;
+  position: relative;
+  margin: 20px 0 0 300px;
+}
+
+
+th{
+  background-color: #00083a;
+}
+
+.hr {
+  background-color: white;
+  border-width: 3px;
+}
+
+.my-custom-scrollbar{
+  height: 240px;
+  overflow: auto;
+}
+
+.table-wrapper-scroll-y {
+  display: block;
+}
+
+#container1{
+  position: relative;
+  margin: 20px 0 0 300px;
+  width: 70%
+}
+
+#btn{
+  margin: 20px 0 0 570px;
+}

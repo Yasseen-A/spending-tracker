@@ -1,0 +1,31 @@
+
+.home_heading{
+  color: white;
+  font-size: 55pt;
+  margin: 20% 0 0 15%;
+  position: absolute;
+}
+
+.logo{
+  width: 80px;
+  height: 80px;
+  margin: 20.5% 0 0 8%;
+  position: relative;
+}
+
+.slogan {
+  color: white;
+  font-size: 20pt;
+  margin: 20px 0 0 8%;
+}
+
+.slogan2 {
+  color: white;
+  font-size: 15pt;
+  margin: 5px 0 0 8%;
+}
+
+.homepage_buttons {
+  margin: 30px 0 0 8%;
+  color: white;
+}

@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+
+<!-- calling all of the required libraries for jquery bootstrap and highcharts -->
+  <meta charset="utf-8">
+  <title>Spending tracker</title>
+  <script src="https://code.jquery.com/jquery-3.5.0.min.js" integrity="sha256-xNzN2a4ltkB44Mc/Jz3pT4iU1cmeR0FkXs4pru/JxaQ=" crossorigin="anonymous"></script>
+  <script src="http://code.highcharts.com/highcharts.js"></script>
+  <script src="{{ url_for('static',    filename='JavaScript/graph.js') }}"></script>
+  <link rel="stylesheet" href="{{ url_for('static',    filename='css/style.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static',    filename='css/home.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static',    filename='css/profile.css') }}">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+  <script src="https://code.highcharts.com/highcharts.js"></script>
+  <script src="https://code.highcharts.com/modules/series-label.js"></script>
+  <script src="https://code.highcharts.com/modules/exporting.js"></script>
+  <script src="https://code.highcharts.com/modules/export-data.js"></script>
+  <script src="https://code.highcharts.com/modules/accessibility.js"></script>
+</head>
+
+<body>
+  {% include 'includes/_messages.html' %}
+  {% include 'includes/_navbar.html' %}
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js">
+
+  </script>
+  <div class="profile">
+
+    <h1>Profile</h1>
+    <h5>Welcome {{session.username}}</h5>
+    <hr class="hr">
+
+    <!-- vertical menu on te left side of the screen -->
+    <div class="spending-menu">
+
+      <ul>
+        <li class="nav-item active ">
+          <a class="nav-link" href="/add_spending">Add spending</a>
+        </li>
+        <li class="nav-item active">
+          <a class="nav-link" href="/profile/three_days">Last three days</a>
+        </li>
+        <li class="nav-item active">
+          <a class="nav-link" href="/profile/last_week">Last week</a>
+        </li>
+        <li class="nav-item active">
+          <a class="nav-link" href="/profile/last_month">Last month</a>
+        </li>
+      </ul>
+
+    </div>
+<!-- tabel to display users data -->
+    <div class="table-wrapper-scroll-y my-custom-scrollbar">
+      <table class="table-striped spendings-table" id="table1">
+        <tr>
+          <th>Amount</th>
+          <th>Description</th>
+          <th>Date & Time</th>
+          <th></th>
+          <th></th>
+        </tr>
+        {% for spendings in spendings %}
+        <tr>
+          <td>{{spendings.spending}}</td>
+          <td>{{spendings.description}}</td>
+          <td>{{spendings.register_date}}</td>
+          <td>
+            <form action="{{url_for('edit_spending', id=spendings.id)}}" method="post">
+              <input type="hidden" name="_method" value="EDIT">
+              <input type="submit" value="edit" class="btn btn-primary">
+            </form>
+          </td>
+          <td>
+            <form action="{{url_for('delete_spending', id=spendings.id)}}" method="post">
+              <input type="hidden" name="_method" value="DELETE">
+              <input type="submit" value="delete" class="btn btn-danger">
+            </form>
+          </td>
+        </tr>
+
+        {% endfor %}
+      </table>
+    </div>
+
+<!-- highcharts libraries -->
+    <script src="https://code.highcharts.com/highcharts.js"></script>
+    <script src="https://code.highcharts.com/modules/exporting.js"></script>
+
+
+<!-- div to insert chart -->
+    <div id="container1" style="min-width: 310px; height: 300px; width: 70%;"></div>
+
+
+
+    <button id="btn" class="btn btn-success">Update Activities</button>
+
+  </div>
+
+
+
+
+<!-- script to extract users data put them into array to display on the graph -->
+  <script type="text/javascript">
+    $(function() {
+      $('#container1').highcharts({
+        chart: {
+          type: 'line'
+        },
+        title: {
+          text: 'Spendings graph'
+        },
+        subtitle: {
+        },
+        xAxis: {
+        },
+        yAxis: {
+          title: {
+            text: 'Amount (£)'
+          }
+        },
+        plotOptions: {
+          line: {
+            dataLabels: {
+              enabled: true
+            },
+            enableMouseTracking: false
+          }
+        },
+        series: [{
+          name: 'Spending activity',
+        }]
+      });
+
+
+      $('#btn').bind('click', function() {
+        var chart1 = $('#container1').highcharts(),
+          chart2 = $('#container2').highcharts();
+
+          // get all of the dates and times and put into array
+        var times = new Array();
+        $("#table1 tr td:nth-child(3)").each(function(i) {
+          times.push($(this).text());
+        });
+        // get all of the amounts, convert into int and put into array
+        var myArray = new Array();
+        $("#table1 tr td:nth-child(1)").each(function(i) {
+          myArray.push($(this).text());
+        });
+        var result = myArray.map(function(x) {
+          return parseInt(x, 10);
+        });
+
+
+
+        chart1.series[0].update({
+          data: result,
+        }, false);
+
+        chart1.xAxis[0].update({
+          categories: times,
+        }, false);
+
+
+        chart1.redraw();
+      });
+    });
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+ <meta charset="utf-8">
+ <title>Spending Tracker</title>
+ <script src="{{ url_for('static',    filename='JavaScript/script.js') }}"></script>
+ <link rel="stylesheet" href="{{ url_for('static',    filename='css/style.css') }}">
+ <link rel="stylesheet" href="{{ url_for('static',    filename='css/home.css') }}">
+ <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+
+</head>
+<body>
+
+
+{% include 'includes/_navbar.html' %}
+{% include 'includes/_messages.html' %}
+
+<!-- landing page, tells users what the website is about and how to start using -->
+<h1 class="home_heading">Spending Tracker</h1>
+<img src="../static/img/pound-sterling.png" class="logo">
+
+<h2 class="slogan">Want to keep track of how much money you're spending?</h2>
+<h2 class="slogan2">Register or log in and start tracking now</h2>
+
+<!-- div to contain both log in and register buttons -->
+<div class="homepage_buttons">
+
+  <a href="/register" class="btn btn-success">Register now</a>
+  <a href="/login" class="btn btn-primary">Login</a>
+
+</div>
+
+
+</body>
+</html>

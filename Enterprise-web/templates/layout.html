@@ -1,0 +1,26 @@
+ <!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="utf-8">
+  <title>Spending Tracker</title>
+  <script src="{{ url_for('static',    filename='static/JavaScript/chart.js') }}"></script>
+  <link rel="stylesheet" href="{{ url_for('static',    filename='css/style.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static',    filename='css/home.css') }}">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+
+</head>
+  <body>
+
+    {% include 'includes/_navbar.html' %}
+      <div class="container" style="max-width:50%">
+      {% include 'includes/_messages.html' %}
+      {% from "includes/_formhelpers.html" import render_field %}
+
+    {% block body %}
+</div>
+    {% endblock%}
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js">
+
+    </script>
+  </body>
+</html>

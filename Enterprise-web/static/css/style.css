@@ -1,0 +1,13 @@
+.container{
+  margin-top: 60px;
+  color: white;
+}
+
+body {
+  background-image: url('../img/vintage-wallpaper.png');
+  background-position: center center;
+  /* background-repeat: no-repeat;  */
+  background-attachment: fixed;
+  /* background-size: cover; */
+  background-color: #464646;
+}
